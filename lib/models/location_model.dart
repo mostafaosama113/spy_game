@@ -7,4 +7,5 @@ class LocationModel {
     name = json['name'];
     isShow = json['isShow'] == 1;
   }
+  LocationModel({required this.id, required this.isShow, required this.name});
 }

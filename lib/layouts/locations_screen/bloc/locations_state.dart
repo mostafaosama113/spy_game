@@ -9,3 +9,7 @@ class GetAllLocationsSuccessState extends LocationsState {}
 class UpdateVisibilityState extends LocationsState {}
 
 class DeleteLocationState extends LocationsState {}
+
+class ToggleFABState extends LocationsState {}
+
+class AddLocationState extends LocationsState {}

@@ -55,9 +55,12 @@ class SqlfLite {
   }
 
   static Future insert(String txt) async {
-    int x = await db
+    await db
         .rawInsert('INSERT INTO $tableName(name, isShow) VALUES("$txt" , 1)');
-    return x;
+
+    List<Map<dynamic, dynamic>> id = await db.rawQuery(
+        'SELECT * FROM $tableName WHERE id=(SELECT max(id) FROM $tableName);');
+    return id[0]['id'];
   }
 
   static Future<List<Map>> getVisibleLocations() async {

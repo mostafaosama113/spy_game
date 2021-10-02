@@ -36,4 +36,19 @@ class LocationsCubit extends Cubit<LocationsState> {
       emit(DeleteLocationState());
     });
   }
+
+  bool isAdding = false;
+
+  void toggleFAB() {
+    isAdding = !isAdding;
+    emit(ToggleFABState());
+  }
+
+  void addNewLocation(String locationName) {
+    SqlfLite.insert(locationName).then((id) {
+      locationsModel
+          .add(LocationModel(id: id, isShow: true, name: locationName));
+      emit(AddLocationState());
+    });
+  }
 }
