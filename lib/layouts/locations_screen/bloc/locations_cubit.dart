@@ -15,9 +15,9 @@ class LocationsCubit extends Cubit<LocationsState> {
     if (locationsModel.isEmpty) {
       emit(GetAllLocationsLoadingState());
       SqlfLite.getAllLocations().then((value) {
-        value.forEach((element) {
+        for (var element in value) {
           locationsModel.add(LocationModel.fromJson(element));
-        });
+        }
       });
       emit(GetAllLocationsSuccessState());
     }

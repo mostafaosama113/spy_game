@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spy_game_responsive/layouts/game_Setting/game_setting.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/bloc/locations_cubit.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/bloc/locations_state.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/locations_screen.dart';
@@ -29,7 +30,10 @@ class HomeScreen extends StatelessWidget {
                 const Spacer(),
                 myBtn(
                   text: 'Game',
-                  onClick: () {},
+                  onClick: () => navigateTo(
+                    context,
+                    GameSetting(),
+                  ),
                 ),
                 myBtn(
                   text: 'Location',

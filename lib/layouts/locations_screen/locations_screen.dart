@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spy_game_responsive/shared/colors.dart';
-import 'package:spy_game_responsive/shared/components/location_tale.dart';
+import 'package:spy_game_responsive/shared/components/location_tail.dart';
 import 'package:spy_game_responsive/shared/theme.dart';
 import 'bloc/locations_cubit.dart';
 import 'bloc/locations_state.dart';
@@ -9,10 +9,11 @@ import 'bloc/locations_state.dart';
 class LocationsScreen extends StatelessWidget {
   final LocationsCubit cubit;
   LocationsScreen(this.cubit, {Key? key}) : super(key: key);
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late String locationText;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    late String locationText;
     return BlocProvider.value(
       value: cubit,
       child: BlocConsumer<LocationsCubit, LocationsState>(
@@ -91,8 +92,8 @@ class LocationsScreen extends StatelessWidget {
                                     .textTheme
                                     .bodyText2!
                                     .copyWith(fontSize: 14),
-                                decoration:
-                                    InputDecoration(border: InputBorder.none),
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none),
                                 autofocus: true,
                               ),
                             ),

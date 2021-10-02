@@ -20,6 +20,7 @@ ThemeData theme() {
     ),
     scaffoldBackgroundColor: darkBlue,
     appBarTheme: const AppBarTheme(
+      titleSpacing: .1,
       //backwardsCompatibility: false,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
