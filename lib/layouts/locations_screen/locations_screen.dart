@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spy_game_responsive/shared/colors.dart';
-import 'package:spy_game_responsive/shared/components/location_tail.dart';
+import 'package:spy_game_responsive/shared/components/location_tile.dart';
 import 'package:spy_game_responsive/shared/theme.dart';
 import 'bloc/locations_cubit.dart';
 import 'bloc/locations_state.dart';
@@ -43,7 +43,7 @@ class LocationsScreen extends StatelessWidget {
                             key: Key(bloc.locationsModel[index].id.toString()),
                             onDismissed: (_) =>
                                 bloc.deleteLocation(index: index),
-                            child: locationTale(
+                            child: locationTile(
                               locationModel: bloc.locationsModel[index],
                               onPressed: () =>
                                   bloc.updateVisibility(index: index),

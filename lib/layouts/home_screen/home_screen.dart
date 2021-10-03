@@ -23,9 +23,12 @@ class HomeScreen extends StatelessWidget {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(
-                  'images/logo.png',
-                  height: screenHeight * .4,
+                Hero(
+                  tag: const Key('logo'),
+                  child: Image.asset(
+                    'images/logo.png',
+                    height: screenHeight * .4,
+                  ),
                 ),
                 const Spacer(),
                 myBtn(

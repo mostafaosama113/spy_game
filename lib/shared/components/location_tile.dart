@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spy_game_responsive/models/location_model.dart';
 
-locationTale(
+locationTile(
     {required LocationModel locationModel, required Function() onPressed}) {
   return Padding(
     padding: const EdgeInsets.symmetric(
@@ -9,11 +9,16 @@ locationTale(
       // vertical: 5,
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          locationModel.name,
+        Expanded(
+          child: Text(
+            locationModel.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
-        const Spacer(),
+        //const Spacer(),
         IconButton(
           onPressed: () => onPressed(),
           icon: Icon(

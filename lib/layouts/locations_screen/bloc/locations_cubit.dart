@@ -14,7 +14,7 @@ class LocationsCubit extends Cubit<LocationsState> {
   void getAllLocations() {
     if (locationsModel.isEmpty) {
       emit(GetAllLocationsLoadingState());
-      SqlfLite.getAllLocations().then((value) {
+      SqfLite.getAllLocations().then((value) {
         for (var element in value) {
           locationsModel.add(LocationModel.fromJson(element));
         }
@@ -25,13 +25,13 @@ class LocationsCubit extends Cubit<LocationsState> {
 
   void updateVisibility({required int index}) {
     locationsModel[index].isShow = !locationsModel[index].isShow;
-    SqlfLite.update(
+    SqfLite.update(
             locationsModel[index].id, locationsModel[index].isShow ? 1 : 0)
         .then((value) => emit(UpdateVisibilityState()));
   }
 
   void deleteLocation({required int index}) {
-    SqlfLite.delete(locationsModel[index].id).then((value) {
+    SqfLite.delete(locationsModel[index].id).then((value) {
       locationsModel.removeAt(index);
       emit(DeleteLocationState());
     });
@@ -45,7 +45,7 @@ class LocationsCubit extends Cubit<LocationsState> {
   }
 
   void addNewLocation(String locationName) {
-    SqlfLite.insert(locationName).then((id) {
+    SqfLite.insert(locationName).then((id) {
       locationsModel
           .add(LocationModel(id: id, isShow: true, name: locationName));
       emit(AddLocationState());

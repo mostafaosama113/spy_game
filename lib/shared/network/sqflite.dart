@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-class SqlfLite {
+class SqfLite {
   static String dbName = 'location';
   static String tableName = 'locationTable';
   static late Database db;

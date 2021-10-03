@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:spy_game_responsive/shared/components/counter_tail.dart';
+import 'package:spy_game_responsive/shared/components/counter_tile.dart';
 import 'package:spy_game_responsive/shared/components/my_btn.dart';
 
 class GameSetting extends StatelessWidget {
   GameSetting({Key? key}) : super(key: key);
-  final CounterTale playerTale = CounterTale(
+  final CounterTile playerTale = CounterTile(
     minValue: 3,
     startValue: 5,
     icon: FontAwesomeIcons.userAlt,
   );
-  final CounterTale spyTale = CounterTale(
+  final CounterTile spyTale = CounterTile(
     minValue: 1,
     startValue: 3,
     icon: FontAwesomeIcons.userSecret,
@@ -25,9 +25,12 @@ class GameSetting extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset(
-            'images/logo.png',
-            height: screenHeight * .4,
+          Hero(
+            tag: const Key('logo'),
+            child: Image.asset(
+              'images/logo.png',
+              height: screenHeight * .4,
+            ),
           ),
           // const Spacer(),
           // const SizedBox(height: 20),

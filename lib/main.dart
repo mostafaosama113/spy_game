@@ -7,7 +7,7 @@ import 'package:spy_game_responsive/shared/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await SqlfLite.connect();
+  await SqfLite.connect();
   runApp(const MyApp());
 }
 
