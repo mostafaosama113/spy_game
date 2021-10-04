@@ -51,4 +51,13 @@ class LocationsCubit extends Cubit<LocationsState> {
       emit(AddLocationState());
     });
   }
+
+  Future<List<LocationModel>> getAvailableLocation() async {
+    List<LocationModel> availableLocation = [];
+    List<Map<dynamic, dynamic>> json = await SqfLite.getVisibleLocations();
+    for (var element in json) {
+      availableLocation.add(LocationModel.fromJson(element));
+    }
+    return availableLocation;
+  }
 }

@@ -39,6 +39,9 @@ dependencies:
   flutter_bloc: ^7.3.0
   bloc: ^7.2.1
   font_awesome_flutter: ^9.1.0
+  shared_preferences: ^2.0.8
+  flutter_toastr: ^1.0.3
+
 
 dev_dependencies:
   flutter_test:

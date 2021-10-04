@@ -16,8 +16,7 @@ class LocationsScreen extends StatelessWidget {
     late String locationText;
     return BlocProvider.value(
       value: cubit,
-      child: BlocConsumer<LocationsCubit, LocationsState>(
-        listener: (context, state) {},
+      child: BlocBuilder<LocationsCubit, LocationsState>(
         builder: (context, state) {
           var bloc = LocationsCubit.get(context);
           return Scaffold(

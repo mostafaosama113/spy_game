@@ -6,6 +6,8 @@ class GetAllLocationsLoadingState extends LocationsState {}
 
 class GetAllLocationsSuccessState extends LocationsState {}
 
+class GetAvailableLocationState extends LocationsState {}
+
 class UpdateVisibilityState extends LocationsState {}
 
 class DeleteLocationState extends LocationsState {}

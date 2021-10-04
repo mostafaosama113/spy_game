@@ -4,6 +4,7 @@ import 'package:spy_game_responsive/layouts/game_Setting/game_setting.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/bloc/locations_cubit.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/bloc/locations_state.dart';
 import 'package:spy_game_responsive/layouts/locations_screen/locations_screen.dart';
+import 'package:spy_game_responsive/models/location_model.dart';
 import 'package:spy_game_responsive/shared/components/my_btn.dart';
 import 'package:spy_game_responsive/shared/components/navigator.dart';
 
@@ -33,10 +34,14 @@ class HomeScreen extends StatelessWidget {
                 const Spacer(),
                 myBtn(
                   text: 'Game',
-                  onClick: () => navigateTo(
-                    context,
-                    GameSetting(),
-                  ),
+                  onClick: () async {
+                    List<LocationModel> list = await LocationsCubit.get(context)
+                        .getAvailableLocation();
+                    navigateTo(
+                      context,
+                      GameSetting(list),
+                    );
+                  },
                 ),
                 myBtn(
                   text: 'Location',
