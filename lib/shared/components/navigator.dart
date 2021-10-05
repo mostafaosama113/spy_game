@@ -6,3 +6,9 @@ void navigateTo(context, newScreen) {
     return newScreen;
   }));
 }
+
+void navigateToReplacement(context, newScreen) {
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+    return newScreen;
+  }));
+}

@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:spy_game_responsive/layouts/game_screen/game_screen.dart';
 import 'package:spy_game_responsive/models/location_model.dart';
 import 'package:spy_game_responsive/shared/components/counter_tile.dart';
 import 'package:spy_game_responsive/shared/components/my_btn.dart';
+import 'package:spy_game_responsive/shared/components/navigator.dart';
 import 'package:spy_game_responsive/shared/components/toast.dart';
 import 'package:spy_game_responsive/shared/network/local_data.dart';
 
@@ -61,6 +65,13 @@ class GameSetting extends StatelessWidget {
                       await LocalData.setValue(
                           'player', playerTale.value.value);
                       await LocalData.setValue('spy', spyTale.value.value);
+                      navigateToReplacement(
+                          context,
+                          GameScreen(
+                              location:
+                                  list[Random().nextInt(list.length)].name,
+                              player: playerTale.value.value,
+                              spy: spyTale.value.value));
                     }
                   },
                 ),
