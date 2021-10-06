@@ -11,21 +11,21 @@ import 'package:spy_game_responsive/shared/components/toast.dart';
 import 'package:spy_game_responsive/shared/network/local_data.dart';
 
 class GameSetting extends StatelessWidget {
-  final CounterTile playerTale = CounterTile(
+  GameSetting(this.list, {Key? key}) : super(key: key);
+
+  final CounterTile playerTile = CounterTile(
     minValue: 3,
     startValue: LocalData.getValue('player') ?? 5,
     icon: FontAwesomeIcons.userAlt,
   );
 
-  final CounterTile spyTale = CounterTile(
+  final CounterTile spyTile = CounterTile(
     minValue: 1,
     startValue: LocalData.getValue('spy') ?? 2,
     icon: FontAwesomeIcons.userSecret,
   );
 
   final List<LocationModel> list;
-
-  GameSetting(this.list, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +48,14 @@ class GameSetting extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                playerTale,
+                playerTile,
                 const SizedBox(height: 40),
-                spyTale,
+                spyTile,
                 const SizedBox(height: 40),
                 myBtn(
                   text: 'Start Game',
                   onClick: () async {
-                    if (playerTale.value.value <= spyTale.value.value) {
+                    if (playerTile.value.value <= spyTile.value.value) {
                       showToast(context,
                           msg:
                               'The number of players should be more than the number of spies');
@@ -63,15 +63,16 @@ class GameSetting extends StatelessWidget {
                       showToast(context, msg: 'Add locations');
                     } else {
                       await LocalData.setValue(
-                          'player', playerTale.value.value);
-                      await LocalData.setValue('spy', spyTale.value.value);
+                          'player', playerTile.value.value);
+                      await LocalData.setValue('spy', spyTile.value.value);
                       navigateToReplacement(
-                          context,
-                          GameScreen(
-                              location:
-                                  list[Random().nextInt(list.length)].name,
-                              player: playerTale.value.value,
-                              spy: spyTale.value.value));
+                        context,
+                        GameScreen(
+                          location: list[Random().nextInt(list.length)].name,
+                          player: playerTile.value.value,
+                          spy: spyTile.value.value,
+                        ),
+                      );
                     }
                   },
                 ),

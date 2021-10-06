@@ -21,7 +21,9 @@ class LocationsScreen extends StatelessWidget {
           var bloc = LocationsCubit.get(context);
           return Scaffold(
             key: scaffoldKey,
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: const Text('الاماكن'),
+            ),
             body: state is GetAllLocationsLoadingState
                 ? const Center(
                     child: CircularProgressIndicator(),

@@ -1,42 +1,83 @@
-import 'package:flip_card/flip_card.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:spy_game_responsive/shared/components/card.dart';
 
 class GameScreen extends StatelessWidget {
-  const GameScreen(
+  GameScreen(
       {Key? key,
       required this.location,
       required this.player,
-      required this.spy})
-      : super(key: key);
+      required int spy})
+      : super(key: key) {
+    for (int i = 0; i < player; i++) {
+      list.add(false);
+    }
+    while (spy > 0) {
+      int random = Random().nextInt(player);
+      if (!list[random]) {
+        list[random] = true;
+        spy--;
+      }
+    }
+  }
 
   final String location;
-  final int spy, player;
+  final int player;
+  final List<bool> list = [];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          const SizedBox(width: double.infinity),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: FlipCard(
-              direction: FlipDirection.HORIZONTAL, // default
-              front: card(
-                MediaQuery.of(context).size,
-                image: 'card',
-                text: '1',
-              ),
-              back: card(
-                MediaQuery.of(context).size,
-                image: 'spy',
-              ),
+    List<Widget> cardList = [];
+    int counter = player;
+    for (int i = list.length - 1; i >= 0; i--) {
+      if (list[i]) {
+        cardList.add(
+          Dismissible(
+            direction: DismissDirection.up,
+            child: card(context, cardNumber: i + 1),
+            onDismissed: (index) {
+              counter--;
+              if (counter == 0) {
+                //todo : navigate to timer screen
+              }
+            },
+            key: Key(
+              i.toString(),
             ),
           ),
-        ],
+        );
+      } else {
+        cardList.add(
+          Dismissible(
+            direction: DismissDirection.up,
+            child: card(
+              context,
+              cardNumber: i + 1,
+              location: location,
+            ),
+            onDismissed: (index) {
+              counter--;
+              if (counter == 0) {
+                //todo : navigate to timer screen
+              }
+            },
+            key: Key(
+              i.toString(),
+            ),
+          ),
+        );
+      }
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Game'),
+      ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          alignment: Alignment.center,
+          children: cardList,
+        ),
       ),
     );
   }
