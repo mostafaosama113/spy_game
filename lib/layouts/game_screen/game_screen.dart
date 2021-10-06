@@ -34,7 +34,10 @@ class GameScreen extends StatelessWidget {
         cardList.add(
           Dismissible(
             direction: DismissDirection.up,
-            child: card(context, cardNumber: i + 1),
+            child: card(
+              MediaQuery.of(context).size,
+              cardNumber: i + 1,
+            ),
             onDismissed: (index) {
               counter--;
               if (counter == 0) {
@@ -51,7 +54,7 @@ class GameScreen extends StatelessWidget {
           Dismissible(
             direction: DismissDirection.up,
             child: card(
-              context,
+              MediaQuery.of(context).size,
               cardNumber: i + 1,
               location: location,
             ),
@@ -74,6 +77,7 @@ class GameScreen extends StatelessWidget {
       ),
       body: SizedBox(
         width: double.infinity,
+        height: double.infinity,
         child: Stack(
           alignment: Alignment.center,
           children: cardList,
