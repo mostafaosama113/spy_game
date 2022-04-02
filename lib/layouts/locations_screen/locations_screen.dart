@@ -60,56 +60,61 @@ class LocationsScreen extends StatelessWidget {
                     : const Center(
                         child: Text('No locations'),
                       ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (bloc.isAdding) {
-                  if (locationText.isNotEmpty) {
-                    bloc.isAdding = true;
-                    bloc.addNewLocation(locationText);
-                    Navigator.pop(context);
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (bloc.isAdding) {
+                    if (locationText.isNotEmpty) {
+                      bloc.isAdding = true;
+                      bloc.addNewLocation(locationText);
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    bloc.toggleFAB();
+                    locationText = '';
+                    scaffoldKey.currentState!
+                        .showBottomSheet((context) {
+                          return Container(
+                            color: darkBlue,
+                            child: Container(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              decoration: const BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: TextField(
+                                  onChanged: (value) => locationText = value,
+                                  style: theme()
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(fontSize: 14),
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none),
+                                  autofocus: true,
+                                ),
+                              ),
+                            ),
+                          );
+                        })
+                        .closed
+                        .then((value) {
+                          bloc.toggleFAB();
+                        });
                   }
-                } else {
-                  bloc.toggleFAB();
-                  locationText = '';
-                  scaffoldKey.currentState!
-                      .showBottomSheet((context) {
-                        return Container(
-                          color: darkBlue,
-                          child: Container(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: TextField(
-                                onChanged: (value) => locationText = value,
-                                style: theme()
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(fontSize: 14),
-                                decoration: const InputDecoration(
-                                    border: InputBorder.none),
-                                autofocus: true,
-                              ),
-                            ),
-                          ),
-                        );
-                      })
-                      .closed
-                      .then((value) {
-                        bloc.toggleFAB();
-                      });
-                }
-              },
-              backgroundColor: Colors.teal,
-              child: Icon(bloc.isAdding ? Icons.check : Icons.add),
+                },
+                backgroundColor: Colors.teal,
+                child: Icon(bloc.isAdding ? Icons.check : Icons.add),
+              ),
             ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
           );
         },
       ),

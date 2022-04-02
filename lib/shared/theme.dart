@@ -22,6 +22,8 @@ ThemeData theme() {
     appBarTheme: const AppBarTheme(
       titleSpacing: .1,
       systemOverlayStyle: SystemUiOverlayStyle(
+        systemNavigationBarColor: darkBlue,
+        systemNavigationBarIconBrightness: Brightness.light,
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
       ),
